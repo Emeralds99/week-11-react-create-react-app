@@ -2,59 +2,52 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-
-// @see https://reactjs.org/docs/rendering-elements.html#updating-the-rendered-element
 class Clock extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {date: new Date()};
+
+  constructor (props) {
+    super (props)
+    // this.state.displayTime = ''
+    this.state = {
+      displayTime: '',
+      visitorName: 'Barack Obama'
+    }
   }
 
-  componentDidMount() {
-    this.timerID = setInterval(
-      () => this.tick(),
-      1000
-    );
+  componentDidMount () {
+    this.timerId = setInterval(() => {
+      this.tick()
+    }, 1000);
   }
 
-  tick() {
+  tick () {
+    console.log("In tick")
     this.setState({
-      date: new Date()
-    });
+      displayTime: new Date().toLocaleTimeString()
+    })
   }
 
-  render() {
+  render () {
+    const displayTime = this.state.displayTime
+    const visitorName = this.state.visitorName
+
     return (
-      <div>
-        <h1>Hello, world!</h1>
-        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-      </div>
-    );
+    <div className="clock">    
+      <h2>Time is {displayTime}</h2>  
+    <h2>Thanks for visiting {visitorName}</h2>
+    </div>
+    )
   }
 }
 
-// @see https://reactjs.org/docs/create-a-new-react-app.html
-function App() {
+function App () {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload. Ok.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <img src={logo} className="App-logo" alt="logo"/>
       </header>
-      // See https://reactjs.org/docs/rendering-elements.html#updating-the-rendered-element
-      <Clock date={new Date()} />,
+      <Clock/>
     </div>
-  );
+  )
 }
 
 export default App;
